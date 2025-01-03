@@ -13,6 +13,8 @@ jobs:
       # Step 1: Checkout Repository
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          persist-credentials: true
 
       # Step 2: Setup Node.js
       - name: Setup Node.js
@@ -34,3 +36,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
+          publish_branch: gh-pages
