@@ -1,3 +1,10 @@
+name: Deploy to Firebase Hosting
+
+on:
+  push:
+    branches:
+      - main  # Trigger deployment when changes are pushed to the main branch
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -21,3 +28,4 @@ jobs:
         with:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
           projectId: ${{ secrets.FIREBASE_PROJECT_ID }}  # Optional, add if you want to specify a Firebase project
+
