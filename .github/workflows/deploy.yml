@@ -35,3 +35,4 @@ jobs:
           args: deploy --only hosting
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        
