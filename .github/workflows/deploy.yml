@@ -1,31 +1,41 @@
-name: Deploy to Firebase Hosting
+name: Deploy Svelte App to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # Trigger deployment when changes are pushed to the main branch
+      - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+    steps:
+      # Step 1: Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set Working Directory (if necessary)
+      - name: Set Working Directory
+        run: cd svelte-scoreboard-master || true
+
+      # Step 3: Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      - name: Install dependencies
+      # Step 4: Install Dependencies
+      - name: Install Dependencies
         run: npm install
 
-      - name: Build project
+      # Step 5: Build Svelte App
+      - name: Build Svelte App
         run: npm run build
 
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      # Step 6: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
-          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}  # Optional, add if you want to specify a Firebase project
-
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
