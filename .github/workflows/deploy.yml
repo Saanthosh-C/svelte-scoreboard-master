@@ -1,4 +1,4 @@
-name: Deploy Svelte App to GitHub Pages
+name: Deploy Svelte App to GitHub Pages and Firebase
 
 on:
   push:
@@ -39,3 +39,11 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: gh-pages
+
+      # Step 7: Deploy to Firebase
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SVELTE_APP_7002F }}
+          channelId: live
