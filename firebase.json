@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "svelte-app-ffb68",
     "public": "public",
     "ignore": [
       "firebase.json",
